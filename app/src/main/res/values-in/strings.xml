@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pencarian Pengguna Github</string>
+    <string name="insert_username">Masukkan pengguna</string>
+    <string name="search">Cari</string>
+    <string name="name">Nama</string>
+    <string name="select">Pilih</string>
+    <string name="title_detail">Detil Pengguna</string>
+    <string name="followers">pengikut</string>
+    <string name="following">mengikuti</string>
+    <string name="title_failed">Gagal</string>
+    <string name="add_fav">Berhasil ditambahkan.</string>
+    <string name="delete_fav">Berhasil dihapus.</string>
+
+    <string name="change_language_settings">Ubah Pengaturan Bahasa</string>
+    <string name="title_favorite">Pengguna Favorit</string>
+    <string name="favorite_empty">Data favorit kosong</string>
+</resources>

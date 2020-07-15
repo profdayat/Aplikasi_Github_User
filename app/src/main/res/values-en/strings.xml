@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Github Users Search</string>
+    <string name="insert_username">Insert username</string>
+    <string name="search">Search</string>
+    <string name="name">Name</string>
+    <string name="select">Select</string>
+    <string name="title_detail">Detail User</string>
+    <string name="followers">followers</string>
+    <string name="following">following</string>
+    <string name="title_failed">Failed</string>
+    <string name="add_fav">Successfully added.</string>
+    <string name="delete_fav">Deleted successfully.</string>
+
+    <string name="change_language_settings">Change Language Settings</string>
+    <string name="title_favorite">Favorite User</string>
+    <string name="favorite_empty">Favorite data is empty</string>
+</resources>
