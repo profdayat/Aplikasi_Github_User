@@ -1,4 +1,4 @@
-package com.dayat.submission3.database;
+package com.dayat.githubfavoriteuser.database;
 
 import android.net.Uri;
 import android.provider.BaseColumns;

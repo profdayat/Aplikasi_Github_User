@@ -1,8 +1,8 @@
-package com.dayat.submission3.service;
+package com.dayat.githubfavoriteuser.service;
 
-import com.dayat.submission3.model.UserObjectData;
-import com.dayat.submission3.model.DetailUserModel;
-import com.dayat.submission3.model.UserItems;
+import com.dayat.githubfavoriteuser.model.DetailUserModel;
+import com.dayat.githubfavoriteuser.model.UserItems;
+import com.dayat.githubfavoriteuser.model.UserObjectData;
 
 import java.util.List;
 

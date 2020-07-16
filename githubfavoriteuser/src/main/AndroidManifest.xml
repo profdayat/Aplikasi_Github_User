@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dayat.submission3">
+    package="com.dayat.githubfavoriteuser">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <permission android:name="com.dayat.submission3.READ_DATABASE" android:protectionLevel="normal"/>
-    <permission android:name="com.dayat.submission3.WRITE_DATABASE" android:protectionLevel="normal"/>
+    <uses-permission android:name="com.dayat.submission3.READ_DATABASE" />
+    <uses-permission android:name="com.dayat.submission3.WRITE_DATABASE" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,20 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".userdetail.DetailUserActivity"
+        <activity android:name=".userdetail.DetailUserActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".FavoriteActivity" />
-
-        <provider
-            android:authorities="com.dayat.submission3"
-            android:name=".provider.FavoritUserProvider"
-            android:enabled="true"
-            android:exported="true"
-            android:readPermission="com.dayat.submission3.READ_DATABASE"
-            android:writePermission="com.dayat.submission3.WRITE_DATABASE" />
-
     </application>
+
 </manifest>

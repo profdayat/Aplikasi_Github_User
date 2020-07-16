@@ -1,11 +1,4 @@
-package com.dayat.submission3.userdetail;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager.widget.ViewPager;
+package com.dayat.githubfavoriteuser.userdetail;
 
 import android.app.AlertDialog;
 import android.content.ContentValues;
@@ -23,14 +16,20 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager.widget.ViewPager;
+
 import com.bumptech.glide.Glide;
-import com.dayat.submission3.FavoriteActivity;
-import com.dayat.submission3.R;
-import com.dayat.submission3.adapter.ViewPagerAdapter;
-import com.dayat.submission3.model.DetailUserModel;
-import com.dayat.submission3.model.UserItems;
-import com.dayat.submission3.userdetail.followers.FollowersFragment;
-import com.dayat.submission3.userdetail.following.FollowingFragment;
+import com.dayat.githubfavoriteuser.R;
+import com.dayat.githubfavoriteuser.adapter.ViewPagerAdapter;
+import com.dayat.githubfavoriteuser.model.DetailUserModel;
+import com.dayat.githubfavoriteuser.model.UserItems;
+import com.dayat.githubfavoriteuser.userdetail.followers.FollowersFragment;
+import com.dayat.githubfavoriteuser.userdetail.following.FollowingFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -38,9 +37,9 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.Objects;
 
 import static android.provider.BaseColumns._ID;
-import static com.dayat.submission3.database.DatabaseContract.UserColumns.COLUMN_NAME_AVATAR_URL;
-import static com.dayat.submission3.database.DatabaseContract.UserColumns.COLUMN_NAME_USERNAME;
-import static com.dayat.submission3.database.DatabaseContract.UserColumns.CONTENT_URI;
+import static com.dayat.githubfavoriteuser.database.DatabaseContract.UserColumns.COLUMN_NAME_AVATAR_URL;
+import static com.dayat.githubfavoriteuser.database.DatabaseContract.UserColumns.COLUMN_NAME_USERNAME;
+import static com.dayat.githubfavoriteuser.database.DatabaseContract.UserColumns.CONTENT_URI;
 
 
 public class DetailUserActivity extends AppCompatActivity {
@@ -148,10 +147,6 @@ public class DetailUserActivity extends AppCompatActivity {
             case R.id.action_change_settings:
                 Intent intentSetting = new Intent(Settings.ACTION_LOCALE_SETTINGS);
                 startActivity(intentSetting);
-                return true;
-            case R.id.action_favorite:
-                Intent intentFavorite = new Intent(getApplicationContext(), FavoriteActivity.class);
-                startActivity(intentFavorite);
                 return true;
         }
         return super.onOptionsItemSelected(item);
