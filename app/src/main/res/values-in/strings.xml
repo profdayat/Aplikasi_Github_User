@@ -15,4 +15,10 @@
     <string name="change_language_settings">Ubah Pengaturan Bahasa</string>
     <string name="title_favorite">Pengguna Favorit</string>
     <string name="favorite_empty">Data favorit kosong</string>
+    <string name="notification_title">Pengingat dari Github</string>
+    <string name="notification_text">Silahkan buka kembali aplikasi pencarian pengguna github</string>
+    <string name="daily_reminder">Pengingat harian</string>
+    <string name="status_reminder_active">Pengingat harian aktif</string>
+    <string name="status_reminder_not_active">Pengingat harian tidak aktif</string>
+    <string name="change_reminder_settings">Ubah Pengaturan Pengingat</string>
 </resources>

@@ -15,4 +15,10 @@
     <string name="change_language_settings">Change Language Settings</string>
     <string name="title_favorite">Favorite User</string>
     <string name="favorite_empty">Favorite data is empty</string>
+    <string name="notification_title">Reminder From Github</string>
+    <string name="notification_text">Please reopen the github user search application</string>
+    <string name="daily_reminder">Daily reminder</string>
+    <string name="status_reminder_active">Daily reminder active</string>
+    <string name="status_reminder_not_active">Daily reminder not active</string>
+    <string name="change_reminder_settings">Change Reminder Settings</string>
 </resources>
