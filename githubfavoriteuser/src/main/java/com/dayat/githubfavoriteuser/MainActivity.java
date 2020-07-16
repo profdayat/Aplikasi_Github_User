@@ -1,4 +1,4 @@
-package com.dayat.submission3;
+package com.dayat.githubfavoriteuser;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,18 +20,18 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dayat.submission3.adapter.UserAdapter;
-import com.dayat.submission3.database.DatabaseContract;
-import com.dayat.submission3.helper.MappingHelper;
-import com.dayat.submission3.model.UserItems;
-import com.dayat.submission3.userdetail.DetailUserActivity;
+import com.dayat.githubfavoriteuser.adapter.UserAdapter;
+import com.dayat.githubfavoriteuser.database.DatabaseContract;
+import com.dayat.githubfavoriteuser.helper.MappingHelper;
+import com.dayat.githubfavoriteuser.model.UserItems;
+import com.dayat.githubfavoriteuser.userdetail.DetailUserActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class FavoriteActivity extends AppCompatActivity implements UserAdapter.OnItemClickCallback, LoadUsersCallback {
+public class MainActivity extends AppCompatActivity implements UserAdapter.OnItemClickCallback, LoadUsersCallback {
 
     private ArrayList<UserItems> userItems = new ArrayList<>();
     private static final String EXTRA_STATE = "EXTRA_STATE";
@@ -43,10 +43,9 @@ public class FavoriteActivity extends AppCompatActivity implements UserAdapter.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favorite);
+        setContentView(R.layout.activity_main);
 
         Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_favorite);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         progressBar = findViewById(R.id.progressBar);
         recyclerView = findViewById(R.id.recyclerView);
@@ -81,20 +80,16 @@ public class FavoriteActivity extends AppCompatActivity implements UserAdapter.O
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.favorite_menu, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            case R.id.action_change_settings:
-                Intent intentSetting = new Intent(Settings.ACTION_LOCALE_SETTINGS);
-                startActivity(intentSetting);
-                return true;
+        if (item.getItemId() == R.id.action_change_settings) {
+            Intent intentSetting = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            startActivity(intentSetting);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
