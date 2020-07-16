@@ -11,8 +11,10 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +27,6 @@ import com.bumptech.glide.Glide;
 import com.dayat.submission3.FavoriteActivity;
 import com.dayat.submission3.R;
 import com.dayat.submission3.adapter.ViewPagerAdapter;
-import com.dayat.submission3.database.UserHelper;
 import com.dayat.submission3.model.DetailUserModel;
 import com.dayat.submission3.model.UserItems;
 import com.dayat.submission3.userdetail.followers.FollowersFragment;
@@ -39,14 +40,13 @@ import java.util.Objects;
 import static android.provider.BaseColumns._ID;
 import static com.dayat.submission3.database.DatabaseContract.UserColumns.COLUMN_NAME_AVATAR_URL;
 import static com.dayat.submission3.database.DatabaseContract.UserColumns.COLUMN_NAME_USERNAME;
+import static com.dayat.submission3.database.DatabaseContract.UserColumns.CONTENT_URI;
 
 
 public class DetailUserActivity extends AppCompatActivity {
 
     public static final String EXTRA_USER = "extra_user";
     private UserItems userItems;
-
-    private UserHelper userHelper;
 
     private ProgressBar progressBar;
     private FloatingActionButton fabFav;
@@ -68,9 +68,6 @@ public class DetailUserActivity extends AppCompatActivity {
         showLoading(true);
 
         userItems = getIntent().getParcelableExtra(EXTRA_USER);
-
-        userHelper = UserHelper.getInstance(getApplicationContext());
-        userHelper.open();
 
         assert userItems != null;
         Glide.with(this)
@@ -102,11 +99,13 @@ public class DetailUserActivity extends AppCompatActivity {
     }
 
     private void loadUserFav() {
-        Cursor cursor = userHelper.queryById(String.valueOf(userItems.getId()));
+        Uri uriWithId = Uri.parse(CONTENT_URI + "/" + userItems.getId());
+        Cursor cursor = getContentResolver().query(uriWithId, null, null, null, null);
         if (cursor != null){
             if (cursor.moveToFirst()) statusFavorite = true;
             cursor.close();
         }
+        Log.d("TAG", "loadUserFav: " + statusFavorite);
         setStatusFavorite(statusFavorite);
     }
 
@@ -116,12 +115,12 @@ public class DetailUserActivity extends AppCompatActivity {
             values.put(_ID, userItems.getId());
             values.put(COLUMN_NAME_AVATAR_URL, userItems.getAvatar_url());
             values.put(COLUMN_NAME_USERNAME, userItems.getLogin());
-            userHelper.insert(values);
+            getContentResolver().insert(CONTENT_URI, values);
         }
     }
 
     private void deleteFavoriteItem() {
-        userHelper.deleteById(String.valueOf(userItems.getId()));
+        getContentResolver().delete(Uri.parse(CONTENT_URI + "/" + userItems.getId()),null,null);
     }
 
     private void showSnackbarMessage(String message) {

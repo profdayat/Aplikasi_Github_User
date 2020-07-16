@@ -6,10 +6,14 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +21,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.dayat.submission3.adapter.UserAdapter;
-import com.dayat.submission3.database.UserHelper;
+import com.dayat.submission3.database.DatabaseContract;
 import com.dayat.submission3.helper.MappingHelper;
 import com.dayat.submission3.model.UserItems;
 import com.dayat.submission3.userdetail.DetailUserActivity;
@@ -44,9 +48,6 @@ public class FavoriteActivity extends AppCompatActivity implements UserAdapter.O
         Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_favorite);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        UserHelper userHelper = UserHelper.getInstance(getApplicationContext());
-        userHelper.open();
-
         progressBar = findViewById(R.id.progressBar);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -56,8 +57,14 @@ public class FavoriteActivity extends AppCompatActivity implements UserAdapter.O
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
 
+        HandlerThread handlerThread = new HandlerThread("DataObserver");
+        handlerThread.start();
+        Handler handler = new Handler(handlerThread.getLooper());
+        DataObserver myObserver = new DataObserver(handler, this);
+        getContentResolver().registerContentObserver(DatabaseContract.UserColumns.CONTENT_URI, true, myObserver);
+
         if (savedInstanceState == null) {
-            new LoadUsersAsync(userHelper, this).execute();
+            new LoadUsersAsync(this, this).execute();
         } else {
             ArrayList<UserItems> userItems = savedInstanceState.getParcelableArrayList(EXTRA_STATE);
             if (userItems != null) {
@@ -127,11 +134,11 @@ public class FavoriteActivity extends AppCompatActivity implements UserAdapter.O
 
     private static class LoadUsersAsync extends AsyncTask<Void, Void, ArrayList<UserItems>> {
 
-        private final WeakReference<UserHelper> weakUserHelper;
+        private final WeakReference<Context> weakContext;
         private final WeakReference<LoadUsersCallback> weakCallback;
 
-        private LoadUsersAsync(UserHelper userHelper, LoadUsersCallback callback) {
-            weakUserHelper = new WeakReference<>(userHelper);
+        private LoadUsersAsync(Context context, LoadUsersCallback callback) {
+            weakContext = new WeakReference<>(context);
             weakCallback = new WeakReference<>(callback);
         }
 
@@ -143,7 +150,13 @@ public class FavoriteActivity extends AppCompatActivity implements UserAdapter.O
 
         @Override
         protected ArrayList<UserItems> doInBackground(Void... voids) {
-            Cursor dataCursor = weakUserHelper.get().queryAll();
+            Context context = weakContext.get();
+            Cursor dataCursor = context.getContentResolver()
+                    .query(DatabaseContract.UserColumns.CONTENT_URI,
+                            null,
+                            null,
+                            null,
+                            null);
             return MappingHelper.mapCursorToArrayList(dataCursor);
         }
 
@@ -151,6 +164,19 @@ public class FavoriteActivity extends AppCompatActivity implements UserAdapter.O
         protected void onPostExecute(ArrayList<UserItems> userItems) {
             super.onPostExecute(userItems);
             weakCallback.get().postExecute(userItems);
+        }
+    }
+
+    public static class DataObserver extends ContentObserver {
+        final Context context;
+        public DataObserver(Handler handler, Context context) {
+            super(handler);
+            this.context = context;
+        }
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
+            new LoadUsersAsync(context, (LoadUsersCallback) context).execute();
         }
     }
 
@@ -167,8 +193,6 @@ public class FavoriteActivity extends AppCompatActivity implements UserAdapter.O
         Intent intent = new Intent(this, DetailUserActivity.class);
         intent.putExtra(DetailUserActivity.EXTRA_USER, userItem);
         startActivity(intent);
-
-        finish();
     }
 
     @Override

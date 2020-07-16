@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface Api {
     String BASE_URL = "https://api.github.com/";
-    String TOKEN = "f4ef29cbe0fa8689e93949e3da87b451a7d22f87";
+    String TOKEN = "9c639df48ffd339a7bc86cf457f1a56ded63f86d";
 
     @GET("search/users")
     Call<UserObjectData> getUsers(@Query("q") String username);
