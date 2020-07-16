@@ -1,12 +1,5 @@
 package com.dayat.submission3;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +11,13 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dayat.submission3.adapter.UserAdapter;
 import com.dayat.submission3.model.UserItems;
@@ -102,7 +102,11 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnIte
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_change_settings:
+            case R.id.action_reminder_settings:
+                Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.change_language_settings:
                 Intent intentSetting = new Intent(Settings.ACTION_LOCALE_SETTINGS);
                 startActivity(intentSetting);
                 return true;
