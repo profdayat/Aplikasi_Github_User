@@ -20,4 +20,6 @@
     <string name="status_reminder_active">Daily reminder active</string>
     <string name="status_reminder_not_active">Daily reminder not active</string>
     <string name="change_reminder_settings">Change Reminder Settings</string>
+    <string name="appwidget_text">My Favorite User</string>
+    <string name="add_widget">Add widget</string>
 </resources>

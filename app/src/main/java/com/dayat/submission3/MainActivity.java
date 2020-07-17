@@ -20,7 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dayat.submission3.adapter.UserAdapter;
+import com.dayat.submission3.favorite.FavoriteActivity;
 import com.dayat.submission3.model.UserItems;
+import com.dayat.submission3.settings.SettingsActivity;
 import com.dayat.submission3.userdetail.DetailUserActivity;
 
 import java.util.ArrayList;
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnIte
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_reminder_settings:
-                Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.change_language_settings:
