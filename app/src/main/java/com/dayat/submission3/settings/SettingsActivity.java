@@ -1,4 +1,4 @@
-package com.dayat.submission3;
+package com.dayat.submission3.settings;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -13,9 +13,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dayat.submission3.notifications.MyReceiver;
+import com.dayat.submission3.R;
+
 import java.util.Calendar;
 
-public class SettingActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
 
@@ -41,13 +44,13 @@ public class SettingActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt("notification",1);
                     editor.apply();
-                    Toast.makeText(SettingActivity.this, getString(R.string.status_reminder_active), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SettingsActivity.this, getString(R.string.status_reminder_active), Toast.LENGTH_SHORT).show();
                 }else {
                     setDailyReminderOff(getApplicationContext());
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt("notification",0);
                     editor.apply();
-                    Toast.makeText(SettingActivity.this, getString(R.string.status_reminder_not_active), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SettingsActivity.this, getString(R.string.status_reminder_not_active), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -70,7 +73,7 @@ public class SettingActivity extends AppCompatActivity {
         }
     }
     private void setDailyReminderOff(Context applicationContext) {
-        Intent intent = new Intent(SettingActivity.this, MyReceiver.class);
+        Intent intent = new Intent(SettingsActivity.this, MyReceiver.class);
 
         AlarmManager alarmManager = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(applicationContext, 46, intent, PendingIntent.FLAG_UPDATE_CURRENT);

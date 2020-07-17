@@ -21,4 +21,6 @@
     <string name="status_reminder_active">Pengingat harian aktif</string>
     <string name="status_reminder_not_active">Pengingat harian tidak aktif</string>
     <string name="change_reminder_settings">Ubah Pengaturan Pengingat</string>
+    <string name="appwidget_text">Pengguna Favorit Saya</string>
+    <string name="add_widget">Tambah widget</string>
 </resources>

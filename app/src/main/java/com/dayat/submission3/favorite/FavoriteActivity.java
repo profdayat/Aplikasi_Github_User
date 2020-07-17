@@ -1,4 +1,4 @@
-package com.dayat.submission3;
+package com.dayat.submission3.favorite;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dayat.submission3.R;
 import com.dayat.submission3.adapter.UserAdapter;
 import com.dayat.submission3.database.DatabaseContract;
 import com.dayat.submission3.helper.MappingHelper;

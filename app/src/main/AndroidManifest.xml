@@ -18,6 +18,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver android:name=".widget.FavoriteAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/favorite_app_widget_info" />
+        </receiver>
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -26,14 +35,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".userdetail.DetailUserActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".FavoriteActivity" />
+        <activity android:name=".favorite.FavoriteActivity" />
 
-        <activity android:name=".SettingActivity"/>
+        <activity android:name=".settings.SettingsActivity" />
 
         <provider
             android:name=".provider.FavoritUserProvider"
@@ -44,9 +52,13 @@
             android:writePermission="com.dayat.submission3.WRITE_DATABASE" />
 
         <receiver
-            android:name=".MyReceiver"
+            android:name=".notifications.MyReceiver"
             android:enabled="true"
             android:exported="true" />
+
+        <service
+            android:name="com.dayat.submission3.widget.StackWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.dayat.submission3;
+package com.dayat.submission3.notifications;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -11,6 +11,9 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
+
+import com.dayat.submission3.MainActivity;
+import com.dayat.submission3.R;
 
 public class MyReceiver extends BroadcastReceiver {
 

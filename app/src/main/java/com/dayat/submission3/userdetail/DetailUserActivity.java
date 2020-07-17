@@ -24,9 +24,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
-import com.dayat.submission3.FavoriteActivity;
+import com.dayat.submission3.favorite.FavoriteActivity;
+import com.dayat.submission3.widget.FavoriteAppWidget;
 import com.dayat.submission3.R;
-import com.dayat.submission3.SettingActivity;
+import com.dayat.submission3.settings.SettingsActivity;
 import com.dayat.submission3.adapter.ViewPagerAdapter;
 import com.dayat.submission3.model.DetailUserModel;
 import com.dayat.submission3.model.UserItems;
@@ -90,6 +91,7 @@ public class DetailUserActivity extends AppCompatActivity {
                     addedFavoriteItem();
                     showSnackbarMessage(getString(R.string.add_fav));
                 }
+                updateWidget();
                 statusFavorite = !statusFavorite;
                 setStatusFavorite(statusFavorite);
 
@@ -133,6 +135,11 @@ public class DetailUserActivity extends AppCompatActivity {
         else fabFav.setImageResource(R.drawable.ic_favorite_border);
     }
 
+    private void updateWidget() {
+        Intent widgetUpdateIntent = new Intent(this, FavoriteAppWidget.class);
+        widgetUpdateIntent.setAction(FavoriteAppWidget.TOAST_ACTION);
+        sendBroadcast(widgetUpdateIntent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -147,7 +154,7 @@ public class DetailUserActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_reminder_settings:
-                Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.change_language_settings:
